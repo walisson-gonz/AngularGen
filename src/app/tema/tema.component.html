@@ -51,8 +51,8 @@
                         <th>{{leia.id}}</th>
                         <td>{{leia.descricao}}</td>
                         <td class="d-flex justify-content-end">
-                            <button class="btn btn-info me-3">Editar</button>
-                            <button class="btn btn-danger">Apagar</button>
+                            <button class="btn btn-info me-3" [routerLink]="['/tema-edit', leia.id]">Editar</button>
+                            <button class="btn btn-danger" [routerLink]="['/tema-delete', leia.id]">Apagar</button>
                         </td>
 
                     </tr>
