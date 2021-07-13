@@ -10,29 +10,33 @@ import { Postagem } from '../model/Postagem';
 export class PostagemService {
 
   constructor(private http: HttpClient
-    ) { }
-  
-    token = {
-      headers: new HttpHeaders().set('Authorization', environment.token)
-    }
+  ) { }
 
-    getAllPostagens(): Observable<Postagem[]>{
-      return this.http.get<Postagem[]>('https://pessoalbloggonzales.herokuapp.com/postagens', this.token)
-    }
+  token = {
+    headers: new HttpHeaders().set('Authorization', environment.token)
+  }
 
-    getByIdPostagem(id:number): Observable<Postagem>{
-      return this.http.get<Postagem>(`https://pessoalbloggonzales.herokuapp.com/postagens/${id}`, this.token)
-    }
+  getAllPostagens(): Observable<Postagem[]> {
+    return this.http.get<Postagem[]>('https://pessoalbloggonzales.herokuapp.com/postagens', this.token)
+  }
 
-    postPostagem(postagem: Postagem): Observable<Postagem>{
-      return this.http.post<Postagem>('https://pessoalbloggonzales.herokuapp.com/postagens', postagem, this.token)
-    }
+  getByIdPostagem(id: number): Observable<Postagem> {
+    return this.http.get<Postagem>(`https://pessoalbloggonzales.herokuapp.com/postagens/${id}`, this.token)
+  }
 
-    putPostagem(postagem: Postagem): Observable<Postagem>{
-      return this.http.put<Postagem>('https://pessoalbloggonzales.herokuapp.com/postagens', postagem, this.token)
-    }
+  getByTituloPostagem(titulo: string): Observable<Postagem[]> {
+    return this.http.get<Postagem[]>(`https://pessoalbloggonzales.herokuapp.com/postagens/titulo/${titulo}`, this.token)
+  }
 
-    deletePostagem(id: number){
-      return this.http.delete(`https://pessoalbloggonzales.herokuapp.com/postagens/${id}`, this.token)
-    }
+  postPostagem(postagem: Postagem): Observable<Postagem> {
+    return this.http.post<Postagem>('https://pessoalbloggonzales.herokuapp.com/postagens', postagem, this.token)
+  }
+
+  putPostagem(postagem: Postagem): Observable<Postagem> {
+    return this.http.put<Postagem>('https://pessoalbloggonzales.herokuapp.com/postagens', postagem, this.token)
+  }
+
+  deletePostagem(id: number) {
+    return this.http.delete(`https://pessoalbloggonzales.herokuapp.com/postagens/${id}`, this.token)
+  }
 }

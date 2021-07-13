@@ -50,6 +50,15 @@
         <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel"
             aria-labelledby="nav-todasPostagens-tab">
 
+            <div class="row d-flex justify-content-center mb-5 mt-5">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="titulo" placeholder="Pesquiser por titulos"
+                            [(ngModel)]='tituloPost' (keyup)='findByTituloPostagem()'>
+                    </div>
+                </div>
+            </div>
+
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
                 <div class="card text-center" *ngFor='let leia of listaPostagens | orderBy : key : reverse'>
                     <div class="card-body">
@@ -76,14 +85,23 @@
                         <p class="card-text"><small class="text-muted">{{leia.data | date: 'dd/MM/yyyy'}} às
                                 {{leia.data | date: 'HH:mm'}}</small></p>
 
-                                <a [routerLink]="['/postagem-edit', leia.id]" href="" class="text-info me-3">Editar</a>
-                                <a [routerLink]="['/postagem-delete', leia.id]" href="" class="text-danger" >Apagar</a>
+                        <a [routerLink]="['/postagem-edit', leia.id]" href="" class="text-info me-3">Editar</a>
+                        <a [routerLink]="['/postagem-delete', leia.id]" href="" class="text-danger">Apagar</a>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="tab-pane fade" id="postagensTema" role="tabpanel" aria-labelledby="nav-postagensTema-tab">
+
+            <div class="row d-flex justify-content-center mb-5 mt-5">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="titulo" placeholder="Pesquiser por temas"
+                            [(ngModel)]='nomeTema' (keyup)='findByNomeTema()'>
+                    </div>
+                </div>
+            </div>
 
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-3" *ngFor='let tema of listaTemas'>
                 <div class="card text-center" *ngFor='let leia of tema.postagem | orderBy : key : reverse'>
