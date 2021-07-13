@@ -22,28 +22,29 @@ export class InicioComponent implements OnInit {
   listaTemas: Tema[]
   idTema: number
 
-listaPostagens: Postagem[]
+  listaPostagens: Postagem[]
 
   user: User = new User
   idUser = environment.id
 
-  
+  key = 'data'
+  reverse = true
 
   constructor(
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService,
     private authService: AuthService,
-    private alertas: AlertasService
+    private alertas: AlertasService,
   ) { }
 
   ngOnInit() {
-    
-    window.scroll(0,0)
+
+    window.scroll(0, 0)
 
     if (environment.token == '') {
       this.alertas.showAlertInfo('Sua seção expirou, faça o login novamente.')
-      this.router.navigate(['/inicio'])
+      this.router.navigate(['/login'])
     }
 
     this.getAllTemas()
@@ -57,22 +58,22 @@ listaPostagens: Postagem[]
     })
   }
 
-  findByIdTema(){
-    this.temaService.getByIdTema(this.idTema).subscribe((resp: Tema)=>{
+  findByIdTema() {
+    this.temaService.getByIdTema(this.idTema).subscribe((resp: Tema) => {
       this.tema = resp
     })
   }
 
-  getAllPostagens(){
-    this.postagemService.getAllPostagens().subscribe((resp: Postagem[])=>{
+  getAllPostagens() {
+    this.postagemService.getAllPostagens().subscribe((resp: Postagem[]) => {
       this.listaPostagens = resp
     })
   }
 
-  findByIdUser(){
-this.authService.getByIdUser(this.idUser).subscribe((resp: User)=>{
-  this.user = resp
-})
+  findByIdUser() {
+    this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
+      this.user = resp
+    })
   }
 
   publicar() {
@@ -82,7 +83,7 @@ this.authService.getByIdUser(this.idUser).subscribe((resp: User)=>{
     this.user.id = this.idUser
     this.postagem.usuario = this.user
 
-    this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem)=>{
+    this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem) => {
       this.postagem = resp
       this.alertas.showAlertSuccess('Postagem realizada com sucesso!')
       this.postagem = new Postagem
