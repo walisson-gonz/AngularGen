@@ -18,16 +18,28 @@ export class AuthService {
     return this.http.post<UserLogin>('https://pessoalbloggonzales.herokuapp.com/usuarios/logar', userLogin)
   }
 
-
-
 cadastrar(user: User): Observable < User > {
   return this.http.post<User>('https://pessoalbloggonzales.herokuapp.com/usuarios/cadastrar', user)
+}
+
+getByIdUser(id: number): Observable<User>{
+  return this.http.get<User>(`https://pessoalbloggonzales.herokuapp.com/usuarios/${id}`)
 }
 
 logado(){
   let ok: boolean = false
 
   if (environment.token != '') {
+    ok = true
+  }
+
+  return ok
+}
+
+adm(){
+  let ok: boolean = false
+
+  if (environment.tipo == 'adm') {
     ok = true
   }
 
